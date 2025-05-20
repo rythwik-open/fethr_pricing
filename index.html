@@ -378,12 +378,16 @@
             IN: {
                 currency: '₹',
                 monthly: '799',
-                yearly: '670'
+                yearly: '670',
+                monthlyLink: 'https://buy.stripe.com/INR_MONTHLY_LINK', // Replace with your actual INR monthly link
+                yearlyLink: 'https://buy.stripe.com/INR_YEARLY_LINK'    // Replace with your actual INR yearly link
             },
             default: {
                 currency: '$',
                 monthly: '9.99',
-                yearly: '8.39'
+                yearly: '8.39',
+                monthlyLink: 'https://buy.stripe.com/USD_MONTHLY_LINK', // Replace with your actual USD monthly link
+                yearlyLink: 'https://buy.stripe.com/USD_YEARLY_LINK'    // Replace with your actual USD yearly link
             }
         };
 
@@ -405,6 +409,10 @@
             
             // Update yearly price
             document.querySelector('.card-container:not(.monthly-card) .price-amount').textContent = priceConfig.yearly;
+
+            // Update Stripe links
+            document.querySelector('.monthly-card .button').href = priceConfig.monthlyLink;
+            document.querySelector('.card-container:not(.monthly-card) .button').href = priceConfig.yearlyLink;
         }
 
         // Function to fetch user location and update pricing
