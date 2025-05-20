@@ -10,9 +10,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             font-family: "Inter", sans-serif;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .card-container {
             --border-bottom-width: 1px;
@@ -22,7 +24,8 @@
             --border-style: solid;
             --border-top-width: 1px;
             background: linear-gradient(135deg, #223056 0%, #000 100%);
-            width: 500px; /* Adjusted to match the approximate width of the Pro card in the image */
+            width: 100%;
+            max-width: 500px;
             opacity: 1;
             border-radius: 24px;
             border: 1px solid rgb(229, 229, 229);
@@ -30,7 +33,7 @@
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            min-height: 700px; /* Ensures enough height for the button to be at the bottom */
+            min-height: 700px;
             position: relative;
         }
         .content {
@@ -132,7 +135,7 @@
             width: 100%;
         }
         .button {
-            background-color: rgb(10, 10, 10);
+            background-color: rgb(255, 255, 255);
             border-radius: 100px;
             box-shadow: rgba(20, 21, 26, 0.05) 0px 1px 2px 0px;
             opacity: 1;
@@ -143,7 +146,7 @@
         }
         .button h6 {
             font-family: "Inter", sans-serif;
-            color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
             margin: 0;
             font-size: 16px;
             font-weight: 600;
@@ -178,6 +181,9 @@
             justify-content: center;
             align-items: flex-start;
             padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .hidden {
             display: none !important;
@@ -225,13 +231,45 @@
             background: #223056;
         }
         @media (max-width: 768px) {
+            body {
+                padding: 16px;
+                align-items: flex-start;
+            }
             .cards-wrapper {
                 flex-direction: column;
                 align-items: center;
+                gap: 24px;
+                padding: 0;
             }
             .card-container {
-                width: 100%;
-                max-width: 500px;
+                min-height: auto;
+                padding: 20px;
+            }
+            .title-container h6 {
+                font-size: 24px;
+                line-height: 28px;
+            }
+            .title-container .subtitle {
+                font-size: 18px;
+                line-height: 24px;
+            }
+            .price-value h3 {
+                font-size: 40px;
+                line-height: 44px;
+            }
+            .features-group {
+                gap: 8px;
+            }
+            .feature p {
+                font-size: 14px;
+                line-height: 20px;
+            }
+            .plan-badge {
+                font-size: 12px;
+                padding: 4px 12px;
+            }
+            .plan-badge.yearly .yearly-badge {
+                font-size: 11px;
             }
         }
     </style>
