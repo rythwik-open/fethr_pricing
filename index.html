@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Card</title>
+    <style>
+        body {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "Inter", sans-serif;
+        }
+        .card-container {
+            --border-bottom-width: 1px;
+            --border-color: rgb(229, 229, 229);
+            --border-left-width: 1px;
+            --border-right-width: 1px;
+            --border-style: solid;
+            --border-top-width: 1px;
+            background: linear-gradient(135deg, #223056 0%, #000 100%);
+            width: 500px; /* Adjusted to match the approximate width of the Pro card in the image */
+            opacity: 1;
+            border-radius: 24px;
+            border: 1px solid rgb(229, 229, 229);
+            padding: 24px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 700px; /* Ensures enough height for the button to be at the bottom */
+            position: relative;
+        }
+        .content {
+            flex: 1 1 auto;
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .head {
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .badge {
+            background-color: rgb(255, 255, 255);
+            opacity: 1;
+            border-radius: 999px;
+            padding: 4px 12px;
+            align-self: flex-start;
+        }
+        .badge-label {
+            outline: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            flex-shrink: 0;
+            transform: none;
+            opacity: 1;
+        }
+        .badge-label p {
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: -0.1px;
+            line-height: 20px;
+            text-align: center;
+            margin: 0;
+            background-image: linear-gradient(90deg, rgb(83, 20, 163) 0%, rgb(244, 142, 47) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .title-container {
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .title-container h6 {
+            font-family: "Inter", sans-serif;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 0px;
+            line-height: 32px;
+            color: rgb(255, 255, 255);
+            margin: 0;
+        }
+        .title-container .subtitle {
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 400;
+        }
+        .price {
+            opacity: 1;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .price-value {
+            display: flex;
+            align-items: baseline;
+        }
+        .price-value h3 {
+            font-family: "Inter", sans-serif;
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            line-height: 48px;
+            color: rgb(255, 255, 255);
+            margin: 0;
+        }
+        .price p {
+            font-family: "Inter", sans-serif;
+            letter-spacing: 0px;
+            line-height: 24px;
+            text-align: left;
+            color: rgb(255, 255, 255);
+            margin: 0;
+        }
+        .divider {
+            background-color: rgb(229, 229, 229);
+            opacity: 1;
+            height: 1px;
+            margin: 16px 0;
+        }
+        .button-container {
+            margin-top: auto;
+            width: 100%;
+        }
+        .button {
+            background-color: rgb(10, 10, 10);
+            border-radius: 100px;
+            box-shadow: rgba(20, 21, 26, 0.05) 0px 1px 2px 0px;
+            opacity: 1;
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        .button h6 {
+            font-family: "Inter", sans-serif;
+            color: rgb(255, 255, 255);
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .features-group {
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .feature {
+            opacity: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feature-icon {
+            font-size: 20px;
+            color: rgb(39, 189, 108); /* green */
+            flex-shrink: 0;
+        }
+        .feature p {
+            font-family: "Inter", sans-serif;
+            letter-spacing: 0px;
+            line-height: 24px;
+            color: rgb(255, 255, 255);
+            margin: 0;
+        }
+        .cards-wrapper {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .yearly-badge {
+            background: linear-gradient(90deg, rgb(83, 20, 163) 0%, rgb(244, 142, 47) 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 2px 8px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .plan-badge {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: white;
+            color: #5314a3;
+            border-radius: 999px;
+            padding: 4px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            z-index: 2;
+            display: inline-block;
+        }
+        .card-container {
+            position: relative;
+        }
+        .plan-badge.yearly {
+            color: #fff;
+            background: linear-gradient(90deg, rgb(83, 20, 163) 0%, rgb(244, 142, 47) 100%);
+            padding-right: 8px;
+        }
+        .plan-badge .yearly-badge {
+            background: transparent;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            margin-left: 4px;
+            padding: 0;
+        }
+        .monthly-card {
+            background: #223056;
+        }
+        @media (max-width: 768px) {
+            .cards-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card-container {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cards-wrapper">
+        <div class="card-container monthly-card">
+            <span class="plan-badge">Monthly</span>
+            <div class="content">
+                <div class="head">
+                    <div class="title-container">
+                        <h6>Pro</h6>
+                        <h6 class="subtitle">Ideal for businesses and creators</h6>
+                    </div>
+                </div>
+                <div class="price">
+                    <div class="price-value">
+                        <h3 class="currency-symbol">$</h3>
+                        <h3 class="price-amount">9.99</h3>
+                    </div>
+                    <p class="price-period">/ per month</p>
+                </div>
+                <div class="divider"></div>
+                <div class="button-container">
+                    <a class="button" href="#">
+                        <h6>Try For Free</h6>
+                    </a>
+                </div>
+                <div class="features-group">
+                    <div class="feature">
+                        <span class="feature-icon plus">+</span>
+                        <p>Everything in Free</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>10 Websites</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>10 Dedicated Workspaces</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Manage clients</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Generate with AI</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Priority Email Support</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Connect Custom Domain</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Unlimited Team Members</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Unlimited Access to Templates</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Unlimited Access to Design Elements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <span class="plan-badge yearly">Yearly <span class="yearly-badge">30% OFF</span></span>
+            <div class="content">
+                <div class="head">
+                    <div class="title-container">
+                        <h6>Pro</h6>
+                        <h6 class="subtitle">Ideal for businesses and creators</h6>
+                    </div>
+                </div>
+                <div class="price">
+                    <div class="price-value">
+                        <h3 class="currency-symbol">$</h3>
+                        <h3 class="price-amount">8.39</h3>
+                    </div>
+                    <p class="price-period">/ per month (billed yearly)</p>
+                </div>
+                <div class="divider"></div>
+                <div class="button-container">
+                    <a class="button" href="#">
+                        <h6>Try For Free</h6>
+                    </a>
+                </div>
+                <div class="features-group">
+                    <div class="feature">
+                        <span class="feature-icon plus">+</span>
+                        <p>Everything in Free</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>10 Websites</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>10 Dedicated Workspaces</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Manage clients</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Generate with AI</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Priority Email Support</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Connect Custom Domain</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Unlimited Team Members</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Unlimited Access to Templates</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <p>Unlimited Access to Design Elements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pricing configuration
+        const pricing = {
+            IN: {
+                currency: '₹',
+                monthly: '799',
+                yearly: '670'
+            },
+            default: {
+                currency: '$',
+                monthly: '9.99',
+                yearly: '8.39'
+            }
+        };
+
+        // Function to update pricing based on country
+        function updatePricing(countryCode) {
+            const priceConfig = pricing[countryCode] || pricing.default;
+            
+            // Update currency symbols
+            document.querySelectorAll('.currency-symbol').forEach(el => {
+                el.textContent = priceConfig.currency;
+            });
+
+            // Update monthly price
+            document.querySelector('.monthly-card .price-amount').textContent = priceConfig.monthly;
+            
+            // Update yearly price
+            document.querySelector('.card-container:not(.monthly-card) .price-amount').textContent = priceConfig.yearly;
+        }
+
+        // Function to fetch user location and update pricing
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                const userCountry = data.country_code;
+                console.log("User Country Detected:", userCountry);
+                updatePricing(userCountry);
+            })
+            .catch(error => {
+                console.error('Error fetching location:', error);
+                // Default to USD pricing if there's an error
+                updatePricing('default');
+            });
+    </script>
+</body>
+</html>
